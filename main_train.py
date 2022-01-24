@@ -249,11 +249,11 @@ for ind, row in dh_qa.iterrows():
     #print(row)
     scene_sum=dh_summary[dh_summary.scene==row['scene']].summary.to_numpy()[0].replace('\n','')
     vd=dh_vd[dh_vd.Scene==row['scene']].Description.to_numpy()[0].replace('\n','')
-    correct=(row['answer'+str(row['idxCorrect'])])
-    text=(vd+''+scene_sum+" "+row['question'])
+    correct=str(row['idxCorrect']).replace('.0','')
+    text=(vd+''+scene_sum+" "+row['question']+' 1:'+row['answer1']+' 2:'+row['answer2']+' 3:'+row['answer3']+' 4:'+row['answer4'])
     v=[text,correct]
     data.append(v)
-dh=pd.DataFrame(data,columns=['text','correct'],dtype=float)
+dh=pd.DataFrame(data,columns=['text','correct'])
 
 print(dh.head())
 flag = torch.cuda.is_available()
