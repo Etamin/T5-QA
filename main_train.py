@@ -249,10 +249,13 @@ for ind, row in dh_qa.iterrows():
     #print(row)
     scene_sum=dh_summary[dh_summary.scene==row['scene']].summary.to_numpy()[0].replace('\n','')
     vd=dh_vd[dh_vd.Scene==row['scene']].Description.to_numpy()[0].replace('\n','')
-    correct=str(row['idxCorrect']).replace('.0','')
-    text=(vd+''+scene_sum+" "+row['question']+' 1:'+row['answer1']+' 2:'+row['answer2']+' 3:'+row['answer3']+' 4:'+row['answer4'])
-    v=[text,correct]
-    data.append(v)
+    for i in range(4):
+        text=(vd+''+scene_sum+" "+row['question']+row['answer'+row['idxCorrect']])
+        if i==row['idxCorrect']:
+            correct=1
+        else: correct=0
+        v=[text,correct]
+        data.append(v)
 dh=pd.DataFrame(data,columns=['text','correct'])
 
 print(dh.head())
