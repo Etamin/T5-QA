@@ -250,7 +250,7 @@ for ind, row in dh_qa.iterrows():
     scene_sum=dh_summary[dh_summary.scene==row['scene']].summary.to_numpy()[0].replace('\n','')
     vd=dh_vd[dh_vd.Scene==row['scene']].Description.to_numpy()[0].replace('\n','')
     for i in range(4):
-        text=(vd+''+scene_sum+" "+row['question']+row['answer'+row['idxCorrect']])
+        text=(vd+''+scene_sum+" "+row['question']+row['answer'+str(row['idxCorrect'])])
         if i==row['idxCorrect']:
             correct=1
         else: correct=0
